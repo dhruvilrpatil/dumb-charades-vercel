@@ -37,7 +37,6 @@ export default function App() {
   // Active round session ID for persistence
   const [activeRoundSessionId, setActiveRoundSessionId] = useState(null)
 
-<<<<<<< HEAD
   // Persistent Players list: initialized from cache for instant zero-flicker render
   const [players, setPlayers] = useState(() => {
     return getCachedPlayers() || DEFAULT_PLAYERS
@@ -55,35 +54,6 @@ export default function App() {
       isMounted = false
     }
   }, [])
-=======
-  // Players list
-  const [players, setPlayers] = useState([
-    {
-      id: 'p1',
-      name: 'Raj',
-      color: getPlayerColor(0),
-      score: 0,
-      guessedCount: 0,
-      passCount: 0,
-    },
-    {
-      id: 'p2',
-      name: 'Simran',
-      color: getPlayerColor(1),
-      score: 0,
-      guessedCount: 0,
-      passCount: 0,
-    },
-    {
-      id: 'p3',
-      name: 'Kabir',
-      color: getPlayerColor(2),
-      score: 0,
-      guessedCount: 0,
-      passCount: 0,
-    },
-  ])
->>>>>>> 7f9e9ad04c8c2150df7867033af384d7ef4c81ce
 
   // Game configuration
   const [settings, setSettings] = useState({
@@ -247,7 +217,6 @@ export default function App() {
     [settings]
   )
 
-<<<<<<< HEAD
   // Add a new player (persisted to Supabase DB and local storage)
   const handleAddPlayer = async (name) => {
     if (!name.trim()) return
@@ -269,25 +238,6 @@ export default function App() {
       saveCachedPlayers(updated)
       return updated
     })
-=======
-  // Add a new player
-  const handleAddPlayer = (name) => {
-    const newPlayer = {
-      id: `p-${Date.now()}-${Math.random().toString(36).substring(2, 5)}`,
-      name,
-      color: getPlayerColor(players.length),
-      score: 0,
-      guessedCount: 0,
-      passCount: 0,
-    }
-    setPlayers((prev) => [...prev, newPlayer])
-    vibrate([30])
-  }
-
-  // Remove a player
-  const handleRemovePlayer = (id) => {
-    setPlayers((prev) => prev.filter((p) => p.id !== id))
->>>>>>> 7f9e9ad04c8c2150df7867033af384d7ef4c81ce
     vibrate([30])
   }
 
@@ -445,10 +395,7 @@ export default function App() {
       }
     })
     setPlayers(updatedPlayers)
-<<<<<<< HEAD
     updatePlayerScores(updatedPlayers)
-=======
->>>>>>> 7f9e9ad04c8c2150df7867033af384d7ef4c81ce
 
     // 3. Advance to next player with fresh movie
     const nextIdx = (playerIndex + 1) % updatedPlayers.length
@@ -515,10 +462,7 @@ export default function App() {
         : p
     )
     setPlayers(updatedPlayers)
-<<<<<<< HEAD
     updatePlayerScores(updatedPlayers)
-=======
->>>>>>> 7f9e9ad04c8c2150df7867033af384d7ef4c81ce
 
     // 3. Next actor in rotation, BUT CURRENT MOVIE REMAINS UNCHANGED!
     const nextIdx = (playerIndex + 1) % updatedPlayers.length
@@ -600,16 +544,7 @@ export default function App() {
   // Start Next Round: Reset Tournament
   const handleResetTournament = () => {
     setIsNewRoundDialogOpen(false)
-<<<<<<< HEAD
     const resetPlayers = resetPlayerScores(players)
-=======
-    const resetPlayers = players.map((p) => ({
-      ...p,
-      score: 0,
-      guessedCount: 0,
-      passCount: 0,
-    }))
->>>>>>> 7f9e9ad04c8c2150df7867033af384d7ef4c81ce
     setPlayers(resetPlayers)
     setRoundNumber(1)
     setTurnNumber(1)
@@ -777,19 +712,8 @@ export default function App() {
         isOpen={isAllTimeScoreboardModalOpen}
         onClose={() => closeModal('scoreboardModal', setIsAllTimeScoreboardModalOpen)}
         onReset={() => {
-<<<<<<< HEAD
           const reset = resetPlayerScores(players)
           setPlayers(reset)
-=======
-          setPlayers((prev) =>
-            prev.map((p) => ({
-              ...p,
-              score: 0,
-              guessedCount: 0,
-              passCount: 0,
-            }))
-          )
->>>>>>> 7f9e9ad04c8c2150df7867033af384d7ef4c81ce
           setTurnLogs([])
         }}
       />
